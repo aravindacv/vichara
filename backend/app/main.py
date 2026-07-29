@@ -29,6 +29,19 @@ app.add_middleware(
 )
 
 Base.metadata.create_all(bind=engine)
+
+# Auto-seed the problem bank on every startup — idempotent (skips existing
+# problems), so this works safely on every deploy/restart with zero manual
+# steps. Needed because Render's free tier has no Shell access to run a
+# seed script by hand.
+from app.database import SessionLocal
+from app.seed_data import seed_problems as _seed_problems
+_db = SessionLocal()
+try:
+    _seed_problems(_db)
+finally:
+    _db.close()
+
 app.include_router(design_router.router)
 app.include_router(execution_router.router)
 app.include_router(tutor_router.router)
