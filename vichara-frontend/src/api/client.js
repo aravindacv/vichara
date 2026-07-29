@@ -40,21 +40,29 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Endpoints where a 401 should NOT log the whole user out - these are
+// background/secondary checks that already fail gracefully on their own
+// (e.g. "has my instructor left feedback yet"). A failure here is not
+// evidence the session itself is invalid.
+const SOFT_ENDPOINTS = ["/feedback/self/"];
+
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const config = error.config;
+    const url = config?.url || "";
+    const isSoft = SOFT_ENDPOINTS.some((s) => url.includes(s));
+
     if (error.response && error.response.status === 401 && config && !config.__isRetry) {
       // Transient 401s can happen right after login (e.g. a cold-starting
       // free-tier backend) - retry once before treating it as a real
       // auth failure, instead of immediately logging the user out.
       config.__isRetry = true;
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 1200));
       return api(config);
     }
 
-    if (error.response && error.response.status === 401) {
-      const url = error.config?.url || "";
+    if (error.response && error.response.status === 401 && !isSoft) {
       const isInstructorEndpoint = url.startsWith("/api/instructor") && !url.includes("/feedback/self/");
       if (isInstructorEndpoint) {
         localStorage.removeItem("vichara_instructor");
