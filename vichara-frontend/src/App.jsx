@@ -56,6 +56,23 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const handleStudentExpired = () => {
+      setStudent(null);
+      setScreen("landing");
+    };
+    const handleInstructorExpired = () => {
+      setInstructor(null);
+      setScreen("landing");
+    };
+    window.addEventListener("vichara:student-logged-out", handleStudentExpired);
+    window.addEventListener("vichara:instructor-logged-out", handleInstructorExpired);
+    return () => {
+      window.removeEventListener("vichara:student-logged-out", handleStudentExpired);
+      window.removeEventListener("vichara:instructor-logged-out", handleInstructorExpired);
+    };
+  }, []);
+
+  useEffect(() => {
     setProgress({ design: false, code: false, trace: false, reflect: false });
   }, [selected]);
 

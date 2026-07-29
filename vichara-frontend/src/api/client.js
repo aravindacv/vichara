@@ -42,16 +42,27 @@ api.interceptors.request.use((config) => {
 
 api.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
+    const config = error.config;
+    if (error.response && error.response.status === 401 && config && !config.__isRetry) {
+      // Transient 401s can happen right after login (e.g. a cold-starting
+      // free-tier backend) - retry once before treating it as a real
+      // auth failure, instead of immediately logging the user out.
+      config.__isRetry = true;
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      return api(config);
+    }
+
     if (error.response && error.response.status === 401) {
       const url = error.config?.url || "";
       const isInstructorEndpoint = url.startsWith("/api/instructor") && !url.includes("/feedback/self/");
       if (isInstructorEndpoint) {
         localStorage.removeItem("vichara_instructor");
+        window.dispatchEvent(new CustomEvent("vichara:instructor-logged-out"));
       } else {
         localStorage.removeItem("vichara_student");
+        window.dispatchEvent(new CustomEvent("vichara:student-logged-out"));
       }
-      window.location.reload();
     }
     return Promise.reject(error);
   }
