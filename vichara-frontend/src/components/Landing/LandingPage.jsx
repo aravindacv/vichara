@@ -60,7 +60,7 @@ export default function LandingPage({ onGetStarted, onInstructorSignIn }) {
       <style>{styles}</style>
 
       <nav className="landing-nav">
-        <div className="wordmark">vichara</div>
+        <div className="wordmark">Think & Code</div>
         <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
           {onInstructorSignIn && (
             <button

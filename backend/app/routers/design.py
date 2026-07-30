@@ -32,11 +32,14 @@ def get_problem(problem_id: str, db: Session = Depends(get_db)):
     problem = db.query(Problem).filter(Problem.id == problem_id).first()
     if not problem:
         raise HTTPException(status_code=404, detail="Problem not found")
+    example = problem.test_cases[0] if problem.test_cases else None
     return {
         "id": problem.id,
         "subject": problem.subject,
         "prompt": problem.prompt,
         "design_requirements": problem.design_requirements,
+        "example_input": example["input"] if example else None,
+        "example_output": example["expected"] if example else None,
     }
 
 

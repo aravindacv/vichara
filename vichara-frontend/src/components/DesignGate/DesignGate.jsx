@@ -94,6 +94,12 @@ export default function DesignGate({ problemId, onDesignStatus, onRunResult, onR
       <h2 className="card-title" style={{ fontSize: "1.15rem", color: "var(--ink)" }}>
         {problem.prompt}
       </h2>
+      {(problem.example_input !== null && problem.example_input !== undefined) && (
+        <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.82rem", color: "var(--ink-soft)", background: "var(--paper-alt)", padding: "0.6rem 0.9rem", borderRadius: "6px", marginBottom: "0.9rem" }}>
+          <strong style={{ color: "var(--indigo)" }}>Example</strong>{"  "}
+          input: {JSON.stringify(problem.example_input)} → output: {JSON.stringify(problem.example_output)}
+        </div>
+      )}
       {revising && (
         <p style={{ color: "var(--ink-soft)", fontSize: "0.85rem" }}>
           Revising your design — your code and progress below are kept until you submit a new plan.{" "}
