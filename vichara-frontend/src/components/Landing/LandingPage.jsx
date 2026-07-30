@@ -49,9 +49,9 @@ const styles = `
 
 export default function LandingPage({ onGetStarted, onInstructorSignIn }) {
   const stages = [
-    { label: "Design", desc: "Plan your approach before touching code — pseudocode, structure, complexity." },
+    { label: "Design", desc: "Plan your approach before touching code  pseudocode, structure, complexity." },
     { label: "Code", desc: "Write it yourself in a real editor. No autocomplete, no AI-generated solutions." },
-    { label: "Trace", desc: "Watch your own code run — flowchart and execution state, side by side." },
+    { label: "Trace", desc: "Watch your own code run flowchart and execution state, side by side." },
     { label: "Reflect", desc: "A short note on what clicked, before you move on." },
   ];
 
@@ -81,9 +81,9 @@ export default function LandingPage({ onGetStarted, onInstructorSignIn }) {
         <div className="landing-badge">
           <span>●</span> a teaching tool that never writes your code
         </div>
-        <h1 className="landing-title">Vichara</h1>
+        <h1 className="landing-title">Think & Code</h1>
         <p style={{ fontSize: "1.05rem", color: "var(--ink-soft)", maxWidth: "520px", margin: "0 auto 1.75rem", lineHeight: 1.55 }}>
-          Built for students who are expected to understand how code works — not paste in an answer.
+          Built for students who are expected to understand how code works  not paste in an answer.
           Design first. Write every line yourself. Watch it run. Reflect on what you learned.
         </p>
         <button type="button" className="landing-btn-primary" onClick={onGetStarted}>
@@ -106,7 +106,7 @@ export default function LandingPage({ onGetStarted, onInstructorSignIn }) {
       <div style={{ maxWidth: "680px", margin: "0 auto", padding: "0 2rem 3.5rem" }}>
         <div className="landing-footer-card">
           <p style={{ fontSize: "0.88rem", color: "var(--ink)", lineHeight: 1.65, margin: 0 }}>
-            <strong style={{ color: "var(--indigo)" }}>The Tutor never generates or completes code</strong> — it only
+            <strong style={{ color: "var(--indigo)" }}>The Tutor never generates or completes code</strong>:-  It only
             asks questions. Every design plan is reviewed for whether it actually solves the problem before
             you're allowed to code. This is a tool for building understanding, not shortcuts.
           </p>
