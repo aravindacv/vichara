@@ -6,6 +6,8 @@ import TutorPanel from "./TutorPanel";
 import ReflectionPanel from "./ReflectionPanel";
 import CallStackView from "./CallStackView";
 
+// Skeleton stubs only — correct function signature + a TODO, never a working
+// solution. Students write the body themselves; that's the entire point.
 const STARTER_CODE = {
   intro_loops_01: `def sum_of_evens(n):
     # TODO: return the sum of all even numbers from 1 to n (inclusive)
@@ -68,6 +70,30 @@ const STARTER_CODE = {
     # TODO: return True if s reads the same forwards and backwards, using a stack
     pass
 `,
+  dsa_max_subarray_01: `def max_subarray(arr):
+    # TODO: return the largest sum of any contiguous subarray in arr
+    pass
+`,
+  dsa_stock_profit_01: `def max_profit(prices):
+    # TODO: return the max profit from buying then selling later, or 0
+    pass
+`,
+  dsa_contains_duplicate_01: `def contains_duplicate(arr):
+    # TODO: return True if any value appears more than once in arr
+    pass
+`,
+  dsa_move_zeroes_01: `def move_zeroes(arr):
+    # TODO: move all zeroes in arr to the end, keep other elements' order, return arr
+    pass
+`,
+  dsa_valid_anagram_01: `def is_anagram(s, t):
+    # TODO: return True if t is an anagram of s
+    pass
+`,
+  dsa_climbing_stairs_01: `def climb_stairs(n):
+    # TODO: return the number of distinct ways to climb n stairs, 1 or 2 steps at a time
+    pass
+`,
 };
 
 const FUNCTION_NAMES = {
@@ -86,9 +112,15 @@ const FUNCTION_NAMES = {
   dsa_valid_parens_01: "is_valid_parentheses",
   dsa_reverse_string_stack_01: "reverse_string_stack",
   dsa_palindrome_stack_01: "is_palindrome_stack",
+  dsa_max_subarray_01: "max_subarray",
+  dsa_stock_profit_01: "max_profit",
+  dsa_contains_duplicate_01: "contains_duplicate",
+  dsa_move_zeroes_01: "move_zeroes",
+  dsa_valid_anagram_01: "is_anagram",
+  dsa_climbing_stairs_01: "climb_stairs",
 };
 
-export default function CodeRunner({ problemId, onRunResult, onReflection }) {
+export default function CodeRunner({ problemId, studentId, onRunResult, onReflection }) {
   const [code, setCode] = useState(STARTER_CODE[problemId] || "");
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
@@ -102,6 +134,7 @@ export default function CodeRunner({ problemId, onRunResult, onReflection }) {
     setStep(0);
     try {
       const res = await api.post("/api/execution/run", {
+        student_id: studentId,
         problem_id: problemId,
         code,
         function_name: FUNCTION_NAMES[problemId],
@@ -181,9 +214,9 @@ export default function CodeRunner({ problemId, onRunResult, onReflection }) {
             </div>
           )}
 
-          {result.passed && <ReflectionPanel problemId={problemId} onReflection={onReflection} />}
+          {result.passed && <ReflectionPanel problemId={problemId} studentId={studentId} onReflection={onReflection} />}
 
-          <TutorPanel problemId={problemId} code={code} runResult={result} />
+          <TutorPanel problemId={problemId} studentId={studentId} code={code} runResult={result} />
         </div>
       )}
     </div>

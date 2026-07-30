@@ -81,10 +81,12 @@ export default function SettingsPanel({ onClose }) {
         <div className="field">
           <label>{hasExisting ? "Replace your API key" : "Your API key"}</label>
           <input
-            type="password"
+            type="text"
+            autoComplete="off"
             value={apiKey}
             onChange={(e) => setApiKey(e.target.value)}
             placeholder={hasExisting ? "Key already saved — enter a new one to replace it" : PROVIDERS.find((p) => p.id === provider)?.keyHint}
+            style={{ fontFamily: "var(--font-mono)" }}
           />
           <p style={{ fontSize: "0.75rem", color: "var(--ink-soft)", marginTop: "0.3rem" }}>
             Get a key at {CONSOLE_LINKS[provider]}

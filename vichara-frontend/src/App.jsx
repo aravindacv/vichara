@@ -5,6 +5,7 @@ import InstructorLoginForm from "./components/Auth/InstructorLoginForm";
 import InstructorDashboard from "./components/Instructor/InstructorDashboard";
 import LandingPage from "./components/Landing/LandingPage";
 import SettingsPanel from "./components/Settings/SettingsPanel";
+import InterviewGuide from "./components/Landing/InterviewGuide";
 import api from "./api/client";
 
 const PROBLEMS = [
@@ -23,6 +24,12 @@ const PROBLEMS = [
   { id: "dsa_valid_parens_01", label: "DSA: Valid Parentheses" },
   { id: "dsa_reverse_string_stack_01", label: "DSA: Reverse via Stack" },
   { id: "dsa_palindrome_stack_01", label: "DSA: Palindrome via Stack" },
+  { id: "dsa_max_subarray_01", label: "Interview: Maximum Subarray" },
+  { id: "dsa_stock_profit_01", label: "Interview: Stock Profit" },
+  { id: "dsa_contains_duplicate_01", label: "Interview: Contains Duplicate" },
+  { id: "dsa_move_zeroes_01", label: "Interview: Move Zeroes" },
+  { id: "dsa_valid_anagram_01", label: "Interview: Valid Anagram" },
+  { id: "dsa_climbing_stairs_01", label: "Interview: Climbing Stairs" },
 ];
 
 const STAGES = ["Design", "Code", "Trace", "Reflect"];
@@ -35,6 +42,7 @@ export default function App() {
   const [selected, setSelected] = useState(PROBLEMS[0].id);
   const [progress, setProgress] = useState({ design: false, code: false, trace: false, reflect: false });
   const [showSettings, setShowSettings] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
 
   useEffect(() => {
     const storedStudent = localStorage.getItem("vichara_student");
@@ -144,6 +152,7 @@ export default function App() {
   return (
     <div className="app-shell">
       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}
+      {showGuide && <InterviewGuide onClose={() => setShowGuide(false)} />}
       <header className="topbar">
         <div className="wordmark">vichara</div>
         <div style={{ textAlign: "center", marginTop: "0.4rem", fontSize: "0.8rem", color: "var(--ink-soft)" }}>
@@ -160,6 +169,13 @@ export default function App() {
             style={{ background: "none", border: "none", color: "var(--ink-soft)", cursor: "pointer", fontSize: "0.8rem", padding: 0, fontWeight: 700 }}
           >
             Settings
+          </button>
+          {" · "}
+          <button
+            onClick={() => setShowGuide(true)}
+            style={{ background: "none", border: "none", color: "var(--indigo)", cursor: "pointer", fontSize: "0.8rem", padding: 0, fontWeight: 700 }}
+          >
+            Interview prep guide
           </button>
         </div>
       </header>
