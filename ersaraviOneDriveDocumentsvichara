@@ -1,0 +1,57 @@
+warning: LF will be replaced by CRLF in vichara-frontend/src/App.jsx.
+The file will have its original line endings in your working directory
+[1mdiff --git a/vichara-frontend/src/App.jsx b/vichara-frontend/src/App.jsx[m
+[1mindex db612b4..b8b93fb 100644[m
+[1m--- a/vichara-frontend/src/App.jsx[m
+[1m+++ b/vichara-frontend/src/App.jsx[m
+[36m@@ -5,6 +5,7 @@[m [mimport InstructorLoginForm from "./components/Auth/InstructorLoginForm";[m
+ import InstructorDashboard from "./components/Instructor/InstructorDashboard";[m
+ import LandingPage from "./components/Landing/LandingPage";[m
+ import SettingsPanel from "./components/Settings/SettingsPanel";[m
+[32m+[m[32mimport InterviewGuide from "./components/Landing/InterviewGuide";[m
+ import api from "./api/client";[m
+ [m
+ const PROBLEMS = [[m
+[36m@@ -23,6 +24,12 @@[m [mconst PROBLEMS = [[m
+   { id: "dsa_valid_parens_01", label: "DSA: Valid Parentheses" },[m
+   { id: "dsa_reverse_string_stack_01", label: "DSA: Reverse via Stack" },[m
+   { id: "dsa_palindrome_stack_01", label: "DSA: Palindrome via Stack" },[m
+[32m+[m[32m  { id: "dsa_max_subarray_01", label: "Interview: Maximum Subarray" },[m
+[32m+[m[32m  { id: "dsa_stock_profit_01", label: "Interview: Stock Profit" },[m
+[32m+[m[32m  { id: "dsa_contains_duplicate_01", label: "Interview: Contains Duplicate" },[m
+[32m+[m[32m  { id: "dsa_move_zeroes_01", label: "Interview: Move Zeroes" },[m
+[32m+[m[32m  { id: "dsa_valid_anagram_01", label: "Interview: Valid Anagram" },[m
+[32m+[m[32m  { id: "dsa_climbing_stairs_01", label: "Interview: Climbing Stairs" },[m
+ ];[m
+ [m
+ const STAGES = ["Design", "Code", "Trace", "Reflect"];[m
+[36m@@ -35,6 +42,7 @@[m [mexport default function App() {[m
+   const [selected, setSelected] = useState(PROBLEMS[0].id);[m
+   const [progress, setProgress] = useState({ design: false, code: false, trace: false, reflect: false });[m
+   const [showSettings, setShowSettings] = useState(false);[m
+[32m+[m[32m  const [showGuide, setShowGuide] = useState(false);[m
+ [m
+   useEffect(() => {[m
+     const storedStudent = localStorage.getItem("vichara_student");[m
+[36m@@ -144,6 +152,7 @@[m [mexport default function App() {[m
+   return ([m
+     <div className="app-shell">[m
+       {showSettings && <SettingsPanel onClose={() => setShowSettings(false)} />}[m
+[32m+[m[32m      {showGuide && <InterviewGuide onClose={() => setShowGuide(false)} />}[m
+       <header className="topbar">[m
+         <div className="wordmark">vichara</div>[m
+         <div style={{ textAlign: "center", marginTop: "0.4rem", fontSize: "0.8rem", color: "var(--ink-soft)" }}>[m
+[36m@@ -161,6 +170,13 @@[m [mexport default function App() {[m
+           >[m
+             Settings[m
+           </button>[m
+[32m+[m[32m          {" · "}[m
+[32m+[m[32m          <button[m
+[32m+[m[32m            onClick={() => setShowGuide(true)}[m
+[32m+[m[32m            style={{ background: "none", border: "none", color: "var(--indigo)", cursor: "pointer", fontSize: "0.8rem", padding: 0, fontWeight: 700 }}[m
+[32m+[m[32m          >[m
+[32m+[m[32m            Interview prep guide[m
+[32m+[m[32m          </button>[m
+         </div>[m
+       </header>[m
+ [m
