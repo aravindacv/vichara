@@ -118,6 +118,49 @@ PROBLEMS = [
         test_cases=[{"input": "level", "expected": True}],
         trace_targets=["array_state"], rubric={"expected_complexity": "O(n)"},
     ),
+    # ---------- DSA: Company interview questions ----------
+    Problem(
+        id="dsa_max_subarray_01", subject="dsa",
+        prompt="Frequently asked at Amazon, Meta, and Google interviews. Given an array of integers, find the contiguous subarray with the largest sum and return that sum.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": {"arr": [-2, 1, -3, 4, -1, 2, 1, -5, 4]}, "expected": 6}],
+        trace_targets=["array_state", "pointer_positions"], rubric={"expected_complexity": "O(n)"},
+    ),
+    Problem(
+        id="dsa_stock_profit_01", subject="dsa",
+        prompt="Frequently asked at Amazon and Meta interviews. Given an array of daily stock prices, return the maximum profit from buying on one day and selling on a later day. Return 0 if no profit is possible.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": {"prices": [7, 1, 5, 3, 6, 4]}, "expected": 5}],
+        trace_targets=["array_state", "pointer_positions"], rubric={"expected_complexity": "O(n)"},
+    ),
+    Problem(
+        id="dsa_contains_duplicate_01", subject="dsa",
+        prompt="Frequently asked at Google and Meta interviews. Given an array of integers, return True if any value appears at least twice, False if every element is distinct.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": {"arr": [1, 2, 3, 1]}, "expected": True}],
+        trace_targets=["array_state", "pointer_positions"], rubric={"expected_complexity": "O(n)"},
+    ),
+    Problem(
+        id="dsa_move_zeroes_01", subject="dsa",
+        prompt="Frequently asked at Meta interviews. Given an array, move all zeroes to the end while keeping the relative order of the non-zero elements. Return the modified array.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": {"arr": [0, 1, 0, 3, 12]}, "expected": [1, 3, 12, 0, 0]}],
+        trace_targets=["array_state", "pointer_positions"], rubric={"expected_complexity": "O(n)"},
+    ),
+    Problem(
+        id="dsa_valid_anagram_01", subject="dsa",
+        prompt="Frequently asked at Amazon and Google interviews. Given two strings, return True if the second is an anagram of the first (same letters, same counts, any order), False otherwise.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": {"s": "anagram", "t": "nagaram"}, "expected": True}],
+        trace_targets=["array_state"], rubric={"expected_complexity": "O(n)"},
+    ),
+    Problem(
+        id="dsa_climbing_stairs_01", subject="dsa",
+        prompt="Frequently asked at Google and Amazon interviews. You are climbing a staircase with n steps. Each time you can climb 1 or 2 steps. Return how many distinct ways you can climb to the top.",
+        design_requirements=["data_structure_choice", "complexity_estimate", "invariant_statement"],
+        test_cases=[{"input": 5, "expected": 8}],
+        trace_targets=["variable_state"], rubric={"expected_complexity": "O(n)"},
+    ),
 ]
 
 
