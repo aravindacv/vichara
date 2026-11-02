@@ -18,8 +18,7 @@ app = FastAPI(title="Vichara Backend")
 
 # FRONTEND_URL should be set in production (e.g. your Cloudflare Pages URL).
 # Falls back to the local Vite dev server if not set.
-allowed_origins = [os.getenv("FRONTEND_URL", "http://localhost:5173")]
-
+allowed_origins = [o.strip() for o in os.getenv("FRONTEND_URL", "http://localhost:5173").split(",")]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
